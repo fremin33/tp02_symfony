@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <table>
+        <tr>
+            <th>nom</th>
+            <th>description</th>
+            <th>prix</th>
+            <th>Categorie</th>
+        </tr>
+        {% for produit in produits %}
+        <tr>
+               <th>{{ produit.nom}}</th>
+                    <th>{{ produit.description}}</th>
+                    <th>{{ produit.prix}}</th>
+                 <!-- <img src="{{ asset('{{produit.image}}') }}" alt=""> -->
+                 <th>{{produit.category.nom}}</th>
+                </tr>
+ {% endfor %}
+    </table>
+{% endblock body %}

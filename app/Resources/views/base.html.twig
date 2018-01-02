@@ -1,13 +1,44 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+
+<body>
+    <header>
+        <h1>Practice Bundle</h1>
+        <nav>
+            <ul>
+                <li>
+                    <a href="/ntrugeon/practiceSymfony/web/" class="tooltipped" data-tooltip="Revenir à l'accueil">Accueil</a>
+                </li>
+                <li>
+                    <a href="{{ path('produit' , {'produit': 'test'}) }}">Exo 1 </a>
+                </li>
+                <li>
+                    <a href="/ntrugeon/practiceSymfony/web/produit" class="tooltipped" data-tooltip="Exercice 1bis">exo1bis</a>
+                </li>
+                <li>
+                    <a href="/ntrugeon/practiceSymfony/web/cat" class="tooltipped" data-tooltip="Exercice 2">exo2</a>
+                </li>
+                <li>
+                    <a href="/ntrugeon/practiceSymfony/web/produit/ajout" class="tooltipped" data-tooltip="Exercice 3">exo3</a>
+                </li>
+                <li>
+                    <a href="/ntrugeon/practiceSymfony/web/categorie/" class="tooltipped" data-tooltip="Exercice 4">exo4</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    {% block body %} {% endblock body %}
+    <footer>
+        <p>Année Universitaire 2017 | 2018 - DFS</p>
+    </footer>
+</body>
+
 </html>
