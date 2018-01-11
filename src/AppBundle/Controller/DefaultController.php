@@ -26,7 +26,6 @@ class DefaultController extends Controller
     public function produitAction(Request $request, $produit)
     {
         $produit = new Produit($produit, 'bablabla', 5.55);
-        var_dump($produit);
         return $this->render('default/produit.html.twig', ['produit' => $produit]);
     }
 
@@ -38,7 +37,6 @@ class DefaultController extends Controller
         $repository = $this->getDoctrine()->getRepository(Produit::class);
         $produits = $repository->findAll();
   
-        var_dump($produits);
         return $this->render('default/produits.html.twig', ['produits' => $produits]);
     }
 
@@ -54,25 +52,27 @@ class DefaultController extends Controller
         return $this->render('default/cat.html.twig', ['categories' => $categories]);
     }
 
-//     /**
-//      * @Route("/ajout", name="ajout")
-//      */
-//     public function addAction(Request $request)
-//     {
+    /**
+     * Creates a new produit entity.
+     *
+     * @Route("/produits/ajout", name="ajoutProduit")
+     */
+    public function newAction(Request $request)
+    {
+        $produit = new Produit();
+        $form = $this->createForm('AppBundle\Form\ProduitType', $produit);
+        $form->handleRequest($request);
 
-//             $produit = new Produit();
-//             $form = $this->createForm('AppBundle\Form\ProduitType', $produit);
-//             $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($produit);
+            $em->flush();
+            return $this->redirectToRoute('produits');
+        }
 
-//             if ($form->isSubmitted() && $form->isValid()) {
-//                 $em = $this->getDoctrine()->getManager();
-//                 $em->persist($produit);
-//                 $em->flush();
-
-//                 return $this->redirectToRoute('produits');
-//             }
-
-//             return $this->render('default/produits.html.twig');
-        
-// }
+        return $this->render('default/ajout.html.twig', array(
+            'produit' => $produit,
+            'form' => $form->createView(),
+        ));
+    }
 }

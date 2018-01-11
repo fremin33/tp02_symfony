@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Categorie;
 
@@ -18,15 +19,17 @@ class Produit
     /**
      * @ORM\ManyToOne(targetEntity="Categorie")
      */
-    private $category;
+    private $categorie;
 
 
     // Création du constructeur pour crée une instance
-    function __construct ($nom, $description, $prix) {
+    function __construct ($nom ="", $description ="", $prix=0) {
         $this->nom = $nom;
         $this->description = $description;
         $this->prix = $prix;
         $this->image = '';
+        $this->categorie = 1;
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -65,6 +68,11 @@ class Produit
      * @ORM\Column(name="image", type="string", length=255)
      */
     private $image;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Produit")
+     */
+    private $tags;
 
 
     /**
@@ -172,5 +180,65 @@ class Produit
     {
         return $this->image;
     }
-}
 
+    /**
+     * Set categorie
+     *
+     * @param \AppBundle\Entity\Categorie $categorie
+     *
+     * @return Produit
+     */
+    public function setCategorie(\AppBundle\Entity\Categorie $categorie = null)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \AppBundle\Entity\Categorie
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+    public function __toString() {
+        return $this->nom;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \AppBundle\Entity\Produit $tag
+     *
+     * @return Produit
+     */
+    public function addTag(\AppBundle\Entity\Produit $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \AppBundle\Entity\Produit $tag
+     */
+    public function removeTag(\AppBundle\Entity\Produit $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+}

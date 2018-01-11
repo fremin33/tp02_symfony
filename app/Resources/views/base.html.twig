@@ -15,22 +15,22 @@
         <nav>
             <ul>
                 <li>
-                    <a href="/ntrugeon/practiceSymfony/web/" class="tooltipped" data-tooltip="Revenir à l'accueil">Accueil</a>
+                    <a href="{{ path('homepage') }}" class="tooltipped" data-tooltip="Revenir à l'accueil">Accueil</a>
                 </li>
                 <li>
                     <a href="{{ path('produit' , {'produit': 'test'}) }}">Exo 1 </a>
                 </li>
                 <li>
-                    <a href="/ntrugeon/practiceSymfony/web/produit" class="tooltipped" data-tooltip="Exercice 1bis">exo1bis</a>
+                    <a href="{{ path('produits') }}" class="tooltipped" data-tooltip="Exercice 1bis">Liste Produits</a>
                 </li>
                 <li>
-                    <a href="/ntrugeon/practiceSymfony/web/cat" class="tooltipped" data-tooltip="Exercice 2">exo2</a>
+                    <a href="{{ path('categories') }}" class="tooltipped" data-tooltip="Exercice 2">Liste Categories</a>
                 </li>
                 <li>
-                    <a href="/ntrugeon/practiceSymfony/web/produit/ajout" class="tooltipped" data-tooltip="Exercice 3">exo3</a>
+                    <a href="{{ path('ajoutProduit') }}" class="tooltipped" data-tooltip="Exercice 3">Ajout produit</a>
                 </li>
                 <li>
-                    <a href="/ntrugeon/practiceSymfony/web/categorie/" class="tooltipped" data-tooltip="Exercice 4">exo4</a>
+                    <a href="{{ path('categorie_index') }}" class="tooltipped" data-tooltip="Exercice 4">exo4</a>
                 </li>
             </ul>
         </nav>

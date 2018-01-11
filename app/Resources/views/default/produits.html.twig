@@ -13,7 +13,10 @@
                     <th>{{ produit.description}}</th>
                     <th>{{ produit.prix}}</th>
                  <!-- <img src="{{ asset('{{produit.image}}') }}" alt=""> -->
-                 <th>{{produit.category.nom}}</th>
+                 <th>{{produit.categorie}}</th>
+            {% for tag in produit.tags %}
+                <th>{{ tag }}</th>
+            {% endfor %}
                 </tr>
  {% endfor %}
     </table>

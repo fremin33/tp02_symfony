@@ -1,8 +1,16 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Ajout</h1>
-    <div>
+    <h1>Produit creation</h1>
 
-</div>
-{% endblock body %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('produits') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}
