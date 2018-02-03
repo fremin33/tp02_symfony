@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Categorie;
+use AppBundle\Entity\Tag;
 
 /**
  * Produit
@@ -70,7 +71,7 @@ class Produit
     private $image;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tag")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag")
      */
     private $tags;
 
@@ -171,6 +172,10 @@ class Produit
         return $this;
     }
 
+
+
+   
+
     /**
      * Get image
      *
@@ -204,18 +209,15 @@ class Produit
     {
         return $this->categorie;
     }
-    public function __toString() {
-        return $this->nom;
-    }
 
     /**
      * Add tag
      *
-     * @param \AppBundle\Entity\Produit $tag
+     * @param \AppBundle\Entity\Tag $tag
      *
      * @return Produit
      */
-    public function addTag(\AppBundle\Entity\Produit $tag)
+    public function addTag(\AppBundle\Entity\Tag $tag)
     {
         $this->tags[] = $tag;
 
@@ -225,9 +227,9 @@ class Produit
     /**
      * Remove tag
      *
-     * @param \AppBundle\Entity\Produit $tag
+     * @param \AppBundle\Entity\Tag $tag
      */
-    public function removeTag(\AppBundle\Entity\Produit $tag)
+    public function removeTag(\AppBundle\Entity\Tag $tag)
     {
         $this->tags->removeElement($tag);
     }

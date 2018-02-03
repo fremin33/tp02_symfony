@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>Nombre de catégories</h1>
+    {{ numbCat | first }} Catégories
+
+    <h1>Liste des produits qui contient le tag tag07 en paramètres classé par ordre alphabétique du nom</h1>
+    <ul>
+        {% for produit in productTag %}
+            <li>{{ produit.nom }}</li>
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for categorie in catVide %}
+            <li>{{ categorie }} n'a pas de produit</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

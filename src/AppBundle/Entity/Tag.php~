@@ -29,7 +29,7 @@ class Tag
     private $nom;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tag")
+     * @ORM\ManyToMany(targetEntity="Produit")
      */
     private $produits;
 
@@ -107,5 +107,9 @@ class Tag
     public function getProduits()
     {
         return $this->produits;
+    }
+
+    public function __toString() {
+        return $this->nom;
     }
 }

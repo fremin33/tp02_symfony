@@ -10,4 +10,28 @@ namespace AppBundle\Repository;
  */
 class CategorieRepository extends \Doctrine\ORM\EntityRepository
 {
+    // affiche le nombre de catégorie
+    public function numberCat () {
+        return $this->createQueryBuilder('c')
+            ->select('count(c)')
+            ->getQuery()
+            ->getSingleResult();
+    }
+
+    // Retoune les catégories sans produits
+    public function categoriesVide() {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $sousRequete = $qb
+            ->select(['c.id'])
+            ->from('AppBundle:Produit', 'p')
+            ->innerJoin('p.categorie', 'c')
+            ->getQuery()
+            ->getArrayResult();
+        return $this->createQueryBuilder('c')
+            ->where($qb->expr()->notIn('c.id', ':sousrequete'))
+            ->setParameter('sousrequete', $sousRequete)
+            ->getQuery()
+            ->getResult();
+    }
 }

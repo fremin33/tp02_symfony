@@ -75,4 +75,31 @@ class DefaultController extends Controller
             'form' => $form->createView(),
         ));
     }
+
+    /**
+     * Display Requete
+     *
+     * @Route("/requetes", name="requetes")
+     */
+    public function requetesAction (Request $request) {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $produitRepository = $em->getRepository(Produit::class);
+        $produits = $produitRepository->findAll();
+        // Numbre de categories
+        $numbCat = $em->getRepository('AppBundle:Categorie')->numberCat();
+        // Numbre de produit ayant un certain tag
+        $productTag = $produitRepository->getProducTag('tag07');
+
+        $catvide = $em->getRepository('AppBundle:Categorie')->categoriesVide();
+        var_dump($catvide);
+
+        return $this->render('default/requetes.html.twig', [
+            'produits' => $produits,
+            'numbCat' => $numbCat,
+            'productTag' => $productTag,
+            'catVide' => $catvide
+        ]);
+    }
 }

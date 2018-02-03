@@ -27,11 +27,13 @@ class LoadInformation implements FixtureInterface
             'Alimentaire'
         ];
 
-
-        foreach ($categories as $name) {
+        $tabCategories = array();
+        foreach ($categories as $name ) {
             // On crée la categorie
             $categorie = new Categorie();
             $categorie->setNom($name);
+            $cat1 = $categorie;
+            $tabCategories[] = $cat1;
             // On la fait persister
             $manager->persist($categorie);
         }
@@ -46,14 +48,18 @@ class LoadInformation implements FixtureInterface
             'tag07'
         ];
 
+        $tabTags = array();
         foreach ($tags as $name) {
             // On crée le tag
             $tag = new Tag();
             $tag->setNom($name);
+            $tag1 = $tag;
+            $tabTags[] = $tag1;
+            var_dump($tabTags);
             // On la fait persister
             $manager->persist($tag);
         }
-
+//var_dump($tabCategories);
         $nameProduit = [
             'produit01',
             'produit02',
@@ -77,8 +83,11 @@ class LoadInformation implements FixtureInterface
             $produit->setNom($name);
             $produit->setDescription('blablabla');
             $produit->setImage($name);
-            $CategorieRepository = $manager->getRepository(Categorie::class);
-            $categories = $CategorieRepository->findAll();        }
+//                $rand_cat = array_rand($tabCategories, 1);
+            $produit->setCategorie($tabCategories[rand(0, count($tabCategories)-1)]);
+            $produit->addTag($tabTags[rand(0, count($tabTags)-1)]);
+            $manager->persist($produit);
+        }
         // On déclenche l'enregistrement de toutes les objets
         $manager->flush();
     }

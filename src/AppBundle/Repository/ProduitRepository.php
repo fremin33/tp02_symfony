@@ -10,4 +10,17 @@ namespace AppBundle\Repository;
  */
 class ProduitRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getProducTag($tag) {
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            ->innerJoin('p.tags', 't')
+            ->where('t.nom=:tag')
+            ->orderBy('t.nom', 'ASC')
+            ->setParameter('tag', $tag)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
 }
